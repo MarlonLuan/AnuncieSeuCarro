@@ -5,14 +5,14 @@
     android:layout_height="match_parent">
     <fragment android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.marlonluan.anuncieseucarro.hotel.HotelListFragment"
+        android:name="com.marlonluan.anuncieseucarro.carro.CarroListFragment"
         android:id="@+id/fragmentLista"/>
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:onClick="adicionarHotelClick"
+        android:onClick="adicionarCarroClick"
         android:src="@drawable/ic_add_white_24dp"
         app:fabSize="normal"
         app:borderWidth="0dp"

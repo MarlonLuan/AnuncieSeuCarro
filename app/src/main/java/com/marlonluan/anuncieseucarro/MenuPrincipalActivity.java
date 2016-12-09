@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.marlonluan.anuncieseucarro.hotel.*;
+import com.marlonluan.anuncieseucarro.carro.*;
 
 public class MenuPrincipalActivity extends AppCompatActivity {
 
@@ -21,14 +21,14 @@ public class MenuPrincipalActivity extends AppCompatActivity {
         mBtnMeusAnuncios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                StartHotelActivity();
+                StartCarroActivity();
             }
         });
     }
 
 
-    public void StartHotelActivity(){
-        Intent it = new Intent(this, HotelActivity.class);
+    public void StartCarroActivity(){
+        Intent it = new Intent(this, CarroActivity.class);
         startActivity(it);
     }
 }

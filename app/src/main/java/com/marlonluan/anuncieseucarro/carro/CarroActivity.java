@@ -1,4 +1,4 @@
-package com.marlonluan.anuncieseucarro.hotel;
+package com.marlonluan.anuncieseucarro.carro;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -20,52 +20,52 @@ import com.marlonluan.anuncieseucarro.*;
 
 import java.util.List;
 
-public class HotelActivity extends AppCompatActivity
+public class CarroActivity extends AppCompatActivity
         implements
-        HotelListFragment.AoClicarNoHotel,
+        CarroListFragment.AoClicarNoCarro,
         SearchView.OnQueryTextListener,
         MenuItemCompat.OnActionExpandListener,
-        HotelDialogFragment.AoSalvarHotel,
-        HotelDetalheFragment.AoEditarHotel,
-        HotelListFragment.AoExcluirHoteis {
+        CarroDialogFragment.AoSalvarCarro,
+        CarolDetalheFragment.AoEditarCarro,
+        CarroListFragment.AoExcluirHoteis {
 
-    public static final int REQUEST_EDITAR_HOTEL = 0;
+    public static final int REQUEST_EDITAR_Carro = 0;
     private long mIdSelecionado;
 
     private FragmentManager mFragmentManager;
-    private HotelListFragment mListFragment;
+    private CarroListFragment mListFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hotel);
+        setContentView(R.layout.activity_carro);
         mFragmentManager = getSupportFragmentManager();
-        mListFragment = (HotelListFragment)
+        mListFragment = (CarroListFragment)
                 mFragmentManager.findFragmentById(R.id.fragmentLista);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_EDITAR_HOTEL && resultCode == RESULT_OK) {
+        if (requestCode == REQUEST_EDITAR_Carro && resultCode == RESULT_OK) {
             mListFragment.limparBusca();
         }
     }
 
-    public void clicouNoHotel(Hotel hotel) {
-        mIdSelecionado = hotel.id;
+    public void clicouNoCarro(Carro carro) {
+        mIdSelecionado = carro.id;
         if (isTablet()) {
-            HotelDetalheFragment fragment =
-                    HotelDetalheFragment.novaInstancia(hotel);
+            CarolDetalheFragment fragment =
+                    CarolDetalheFragment.novaInstancia(carro);
             FragmentTransaction ft = mFragmentManager.beginTransaction();
             ft.replace(R.id.detalhe, fragment,
-                    HotelDetalheFragment.TAG_DETALHE);
+                    CarolDetalheFragment.TAG_DETALHE);
             ft.commit();
         } else {
 
-            Intent it = new Intent(this, HotelDetalheActivity.class);
-            it.putExtra(HotelDetalheActivity.EXTRA_HOTEL, hotel);
-            startActivityForResult(it, REQUEST_EDITAR_HOTEL);
+            Intent it = new Intent(this, CarroDetalheActivity.class);
+            it.putExtra(CarroDetalheActivity.EXTRA_Carro, carro);
+            startActivityForResult(it, REQUEST_EDITAR_Carro);
         }
     }
 
@@ -78,7 +78,7 @@ public class HotelActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_hotel, menu);
+        getMenuInflater().inflate(R.menu.menu_carro, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView)
                 MenuItemCompat.getActionView(searchItem);
@@ -142,33 +142,33 @@ public class HotelActivity extends AppCompatActivity
     }
 
     @Override
-    public void salvouHotel(Hotel hotel) {
-        HotelRepositorio repo = new HotelRepositorio(this);
-        repo.salvar(hotel);
+    public void salvouCarro(Carro carro) {
+        CarroRepositorio repo = new CarroRepositorio(this);
+        repo.salvar(carro);
         mListFragment.limparBusca();
         if (isTablet()) {
-            clicouNoHotel(hotel);
+            clicouNoCarro(carro);
         }
     }
 
-    public void adicionarHotelClick(View v){
-        HotelDialogFragment hotelDialogFragment =
-                HotelDialogFragment.newInstance(null);
-        hotelDialogFragment.abrir(getSupportFragmentManager());
+    public void adicionarCarroClick(View v){
+        CarroDialogFragment carroDialogFragment =
+                CarroDialogFragment.newInstance(null);
+        carroDialogFragment.abrir(getSupportFragmentManager());
     }
 
     @Override
-    public void aoEditarhotel(Hotel hotel) {
-        HotelDialogFragment editNameDialog = HotelDialogFragment.newInstance(hotel);
+    public void aoEditarcarro(Carro carro) {
+        CarroDialogFragment editNameDialog = CarroDialogFragment.newInstance(carro);
         editNameDialog.abrir(getSupportFragmentManager());
     }
     @Override
-    public void exclusaoCompleta(List<Hotel> excluidos) {
-        HotelDetalheFragment f = (HotelDetalheFragment)
-                mFragmentManager.findFragmentByTag(HotelDetalheFragment.TAG_DETALHE);
+    public void exclusaoCompleta(List<Carro> excluidos) {
+        CarolDetalheFragment f = (CarolDetalheFragment)
+                mFragmentManager.findFragmentByTag(CarolDetalheFragment.TAG_DETALHE);
         if (f != null) {
             boolean encontrou = false;
-            for (Hotel h : excluidos) {
+            for (Carro h : excluidos) {
                 if (h.id == mIdSelecionado) {
                     encontrou = true;
                     break;

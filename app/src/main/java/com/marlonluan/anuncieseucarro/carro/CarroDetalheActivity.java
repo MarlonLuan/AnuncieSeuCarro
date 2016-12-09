@@ -1,4 +1,4 @@
-package com.marlonluan.anuncieseucarro.hotel;
+package com.marlonluan.anuncieseucarro.carro;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,19 +10,19 @@ import android.view.MenuItem;
 
 import com.marlonluan.anuncieseucarro.*;
 
-public class HotelDetalheActivity extends AppCompatActivity
-        implements HotelDetalheFragment.AoEditarHotel,
-        HotelDialogFragment.AoSalvarHotel {
+public class CarroDetalheActivity extends AppCompatActivity
+        implements CarolDetalheFragment.AoEditarCarro,
+        CarroDialogFragment.AoSalvarCarro {
 
-    public static final String EXTRA_HOTEL = "hotel";
+    public static final String EXTRA_Carro = "carro";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hotel_detalhe);
+        setContentView(R.layout.activity_carro_detalhe);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
-        Hotel hotel = (Hotel)intent.getSerializableExtra(EXTRA_HOTEL);
-        exibirHotelFragment(hotel);
+        Carro carro = (Carro)intent.getSerializableExtra(EXTRA_Carro);
+        exibirCarroFragment(carro);
     }
 
     @Override
@@ -36,23 +36,23 @@ public class HotelDetalheActivity extends AppCompatActivity
         }
         return super.onOptionsItemSelected(item);
     }
-    private void exibirHotelFragment(Hotel hotel) {
-        HotelDetalheFragment fragment = HotelDetalheFragment.novaInstancia(hotel);
+    private void exibirCarroFragment(Carro carro) {
+        CarolDetalheFragment fragment = CarolDetalheFragment.novaInstancia(carro);
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.detalhe, fragment, HotelDetalheFragment.TAG_DETALHE);
+        ft.replace(R.id.detalhe, fragment, CarolDetalheFragment.TAG_DETALHE);
         ft.commit();
     }
     @Override
-    public void aoEditarhotel(Hotel hotel) {
-        HotelDialogFragment editNameDialog = HotelDialogFragment.newInstance(hotel);
+    public void aoEditarcarro(Carro carro) {
+        CarroDialogFragment editNameDialog = CarroDialogFragment.newInstance(carro);
         editNameDialog.abrir(getSupportFragmentManager());
     }
     @Override
-    public void salvouHotel(Hotel hotel) {
-        HotelRepositorio repo = new HotelRepositorio(this);
-        repo.salvar(hotel);
-        exibirHotelFragment(hotel);
+    public void salvouCarro(Carro carro) {
+        CarroRepositorio repo = new CarroRepositorio(this);
+        repo.salvar(carro);
+        exibirCarroFragment(carro);
         setResult(RESULT_OK);
     }
 

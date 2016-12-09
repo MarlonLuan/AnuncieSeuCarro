@@ -1,4 +1,4 @@
-package com.marlonluan.anuncieseucarro.hotel;
+package com.marlonluan.anuncieseucarro.carro;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -17,44 +17,44 @@ import android.widget.TextView;
 
 import com.marlonluan.anuncieseucarro.*;
 
-public class HotelDetalheFragment extends Fragment {
+public class CarolDetalheFragment extends Fragment {
     public static final String TAG_DETALHE = "tagDetalhe";
-    private static final String EXTRA_HOTEL = "hotel";
+    private static final String EXTRA_Carro = "carro";
     TextView mTextNome;
     TextView mTextEndereco;
     RatingBar mRatingEstrelas;
-    Hotel mHotel;
+    Carro mCarro;
 
     ShareActionProvider mShareActionProvider;
 
-    public static HotelDetalheFragment novaInstancia(Hotel hotel) {
+    public static CarolDetalheFragment novaInstancia(Carro carro) {
         Bundle parametros = new Bundle();
-        parametros.putSerializable(EXTRA_HOTEL, hotel);
-        HotelDetalheFragment fragment = new HotelDetalheFragment();
+        parametros.putSerializable(EXTRA_Carro, carro);
+        CarolDetalheFragment fragment = new CarolDetalheFragment();
         fragment.setArguments(parametros);
         return fragment;
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mHotel = (Hotel)
-                getArguments().getSerializable(EXTRA_HOTEL);
+        mCarro = (Carro)
+                getArguments().getSerializable(EXTRA_Carro);
         setHasOptionsMenu(true);
     }
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(
-                R.layout.fragment_detalhe_hotel, container, false);
+                R.layout.fragment_detalhe_carro, container, false);
         mTextNome = (TextView)layout.findViewById(R.id.txtNome);
         mTextEndereco = (TextView)
                 layout.findViewById(R.id.txtEndereco);
         mRatingEstrelas = (RatingBar)
                 layout.findViewById(R.id.rtbEstrelas);
-        if (mHotel != null) {
-            mTextNome.setText(mHotel.nome);
-            mTextEndereco.setText(mHotel.endereco);
-            mRatingEstrelas.setRating(mHotel.estrelas);
+        if (mCarro != null) {
+            mTextNome.setText(mCarro.nome);
+            mTextEndereco.setText(mCarro.endereco);
+            mRatingEstrelas.setRating(mCarro.estrelas);
         }
         return layout;
     }
@@ -62,12 +62,12 @@ public class HotelDetalheFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_hotel_detalhe, menu);
+        inflater.inflate(R.menu.menu_carro_detalhe, menu);
         MenuItem shareItem = menu.findItem(R.id.action_share);
         mShareActionProvider = (ShareActionProvider)
                 MenuItemCompat.getActionProvider(shareItem);
         String texto = getString(R.string.texto_compartilhar,
-                mHotel.nome, mHotel.estrelas);
+                mCarro.nome, mCarro.estrelas);
         Intent it = new Intent(Intent.ACTION_SEND);
         it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         it.setType("text/plain");
@@ -79,19 +79,19 @@ public class HotelDetalheFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.acao_editar) {
             Activity activity = getActivity();
-            if (activity instanceof AoEditarHotel) {
-                AoEditarHotel aoEditarHotel = (AoEditarHotel)activity;
-                aoEditarHotel.aoEditarhotel(mHotel);
+            if (activity instanceof AoEditarCarro) {
+                AoEditarCarro aoEditarCarro = (AoEditarCarro)activity;
+                aoEditarCarro.aoEditarcarro(mCarro);
                 return true;
             }
         }
         return super.onOptionsItemSelected(item);
     }
-    public Hotel getHotel() {
-        return mHotel;
+    public Carro getCarro() {
+        return mCarro;
     }
-    public interface AoEditarHotel {
-        void aoEditarhotel(Hotel hotel);
+    public interface AoEditarCarro {
+        void aoEditarcarro(Carro carro);
     }
 }
 

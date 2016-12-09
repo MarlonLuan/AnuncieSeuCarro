@@ -23,12 +23,12 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".MenuPrincipalActivity" />
 
-        <activity android:name="com.marlonluan.anuncieseucarro.hotel.HotelActivity" />
-        <activity android:name="com.marlonluan.anuncieseucarro.hotel.HotelDetalheActivity"
-            android:parentActivityName="com.marlonluan.anuncieseucarro.hotel.HotelActivity">
+        <activity android:name="com.marlonluan.anuncieseucarro.carro.CarroActivity" />
+        <activity android:name="com.marlonluan.anuncieseucarro.carro.CarroDetalheActivity"
+            android:parentActivityName="com.marlonluan.anuncieseucarro.carro.CarroActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.marlonluan.anuncieseucarro.hotel.HotelActivity" />
+                android:value="com.marlonluan.anuncieseucarro.carro.CarroActivity" />
         </activity>
     </application>
 

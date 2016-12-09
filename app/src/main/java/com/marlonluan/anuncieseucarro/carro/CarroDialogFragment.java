@@ -1,4 +1,4 @@
-package com.marlonluan.anuncieseucarro.hotel;
+package com.marlonluan.anuncieseucarro.carro;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -12,40 +12,40 @@ import android.widget.TextView;
 
 import com.marlonluan.anuncieseucarro.*;
 
-public class HotelDialogFragment extends DialogFragment
+public class CarroDialogFragment extends DialogFragment
         implements TextView.OnEditorActionListener {
     private static final String DIALOG_TAG = "editDialog";
-    private static final String EXTRA_HOTEL = "hotel";
+    private static final String EXTRA_Carro = "carro";
     private EditText txtNome;
     private EditText txtEndereco;
     private RatingBar rtbEstrelas;
-    private Hotel mHotel;
-    public static HotelDialogFragment newInstance(Hotel hotel) {
+    private Carro mCarro;
+    public static CarroDialogFragment newInstance(Carro carro) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable(EXTRA_HOTEL, hotel);
-        HotelDialogFragment dialog = new HotelDialogFragment();
+        bundle.putSerializable(EXTRA_Carro, carro);
+        CarroDialogFragment dialog = new CarroDialogFragment();
         dialog.setArguments(bundle);
         return dialog;
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mHotel = (Hotel)getArguments().getSerializable(EXTRA_HOTEL);
+        mCarro = (Carro)getArguments().getSerializable(EXTRA_Carro);
     }
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(
-                R.layout.fragment_dialog_hotel, container, false);
+                R.layout.fragment_dialog_carro, container, false);
         txtNome = (EditText) layout.findViewById(R.id.txtNome);
         txtNome.requestFocus();
         txtEndereco = (EditText)layout.findViewById(R.id.txtEndereco);
         txtEndereco.setOnEditorActionListener(this);
         rtbEstrelas = (RatingBar)layout.findViewById(R.id.rtbEstrelas);
-        if (mHotel != null) {
-            txtNome.setText(mHotel.nome);
-            txtEndereco.setText(mHotel.endereco);
-            rtbEstrelas.setRating(mHotel.estrelas);
+        if (mCarro != null) {
+            txtNome.setText(mCarro.nome);
+            txtEndereco.setText(mCarro.endereco);
+            rtbEstrelas.setRating(mCarro.estrelas);
         }
         // Exibe o teclado virtual ao exibir o Dialog
         getDialog().getWindow().setSoftInputMode(
@@ -57,19 +57,19 @@ public class HotelDialogFragment extends DialogFragment
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         if (EditorInfo.IME_ACTION_DONE == actionId) {
             Activity activity = getActivity();
-            if (activity instanceof AoSalvarHotel) {
-                if (mHotel == null) {
-                    mHotel = new Hotel(
+            if (activity instanceof AoSalvarCarro) {
+                if (mCarro == null) {
+                    mCarro = new Carro(
                             txtNome.getText().toString(),
                             txtEndereco.getText().toString(),
                             rtbEstrelas.getRating());
                 } else {
-                    mHotel.nome = txtNome.getText().toString();
-                    mHotel.endereco = txtEndereco.getText().toString();
-                    mHotel.estrelas = rtbEstrelas.getRating();
+                    mCarro.nome = txtNome.getText().toString();
+                    mCarro.endereco = txtEndereco.getText().toString();
+                    mCarro.estrelas = rtbEstrelas.getRating();
                 }
-                AoSalvarHotel listener = (AoSalvarHotel) activity;
-                listener.salvouHotel(mHotel);
+                AoSalvarCarro listener = (AoSalvarCarro) activity;
+                listener.salvouCarro(mCarro);
                 // Feche o dialog
                 dismiss();
                 return true;
@@ -82,8 +82,8 @@ public class HotelDialogFragment extends DialogFragment
             show(fm, DIALOG_TAG);
         }
     }
-    public interface AoSalvarHotel {
-        void salvouHotel(Hotel hotel);
+    public interface AoSalvarCarro {
+        void salvouCarro(Carro carro);
     }
 }
 

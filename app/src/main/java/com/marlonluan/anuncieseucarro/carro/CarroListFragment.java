@@ -1,4 +1,4 @@
-package com.marlonluan.anuncieseucarro.hotel;
+package com.marlonluan.anuncieseucarro.carro;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -19,14 +19,14 @@ import com.marlonluan.anuncieseucarro.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HotelListFragment extends ListFragment
+public class CarroListFragment extends ListFragment
         implements ActionMode.Callback, AdapterView.OnItemLongClickListener {
     ListView mListView;
     ActionMode mActionMode;
 
-    List<Hotel> mHoteis;
-    ArrayAdapter<Hotel> mAdapter;
-    HotelRepositorio mRepositorio;
+    List<Carro> mHoteis;
+    ArrayAdapter<Carro> mAdapter;
+    CarroRepositorio mRepositorio;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,7 @@ public class HotelListFragment extends ListFragment
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mRepositorio = new HotelRepositorio(getActivity());
+        mRepositorio = new CarroRepositorio(getActivity());
         mListView = getListView();
         limparBusca();
     }
@@ -56,10 +56,10 @@ public class HotelListFragment extends ListFragment
         super.onListItemClick(l, v, position, id);
         if (mActionMode == null) {
             Activity activity = getActivity();
-            if (activity instanceof AoClicarNoHotel) {
-                Hotel hotel = (Hotel) l.getItemAtPosition(position);
-                AoClicarNoHotel listener = (AoClicarNoHotel) activity;
-                listener.clicouNoHotel(hotel);
+            if (activity instanceof AoClicarNoCarro) {
+                Carro carro = (Carro) l.getItemAtPosition(position);
+                AoClicarNoCarro listener = (AoClicarNoCarro) activity;
+                listener.clicouNoCarro(carro);
             }
         } else {
             atualizarItensMarcados(mListView, position);
@@ -75,11 +75,11 @@ public class HotelListFragment extends ListFragment
             limparBusca();
             return;
         }
-        List<Hotel> hoteisEncontrados =
-                mRepositorio.buscarHotel("%" + s + "%");
+        List<Carro> hoteisEncontrados =
+                mRepositorio.buscarCarro("%" + s + "%");
 
         mListView.setOnItemLongClickListener(null);
-        mAdapter = new ArrayAdapter<Hotel>(
+        mAdapter = new ArrayAdapter<Carro>(
                 getActivity(),
                 android.R.layout.simple_list_item_1,
                 hoteisEncontrados);
@@ -87,17 +87,17 @@ public class HotelListFragment extends ListFragment
     }
 
     public void limparBusca() {
-        mHoteis = mRepositorio.buscarHotel(null);
+        mHoteis = mRepositorio.buscarCarro(null);
         mListView.setOnItemLongClickListener(this);
-        mAdapter = new ArrayAdapter<Hotel>(
+        mAdapter = new ArrayAdapter<Carro>(
                 getActivity(),
                 android.R.layout.simple_list_item_activated_1,
                 mHoteis);
         setListAdapter(mAdapter);
     }
 
-    public interface AoClicarNoHotel {
-        void clicouNoHotel(Hotel hotel);
+    public interface AoClicarNoCarro {
+        void clicouNoCarro(Carro carro);
     }
 
     @Override
@@ -171,14 +171,14 @@ public class HotelListFragment extends ListFragment
     }
 
     private void remover() {
-        final List<Hotel> hoteisExcluidos = new ArrayList<Hotel>();
+        final List<Carro> hoteisExcluidos = new ArrayList<Carro>();
         SparseBooleanArray checked = mListView.getCheckedItemPositions();
         for (int i = checked.size() - 1; i >= 0; i--) {
             if (checked.valueAt(i)) {
                 int position = checked.keyAt(i);
-                Hotel hotel = mHoteis.remove(position);
-                hoteisExcluidos.add(hotel);
-                mRepositorio.excluir(hotel);
+                Carro carro = mHoteis.remove(position);
+                hoteisExcluidos.add(carro);
+                mRepositorio.excluir(carro);
             }
         }
         Snackbar.make(mListView,
@@ -187,9 +187,9 @@ public class HotelListFragment extends ListFragment
                 .setAction(R.string.desfazer, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        for (Hotel hotel : hoteisExcluidos) {
-                            hotel.id = 0;
-                            mRepositorio.salvar(hotel);
+                        for (Carro carro : hoteisExcluidos) {
+                            carro.id = 0;
+                            mRepositorio.salvar(carro);
                         }
                         limparBusca();
                     }
@@ -201,6 +201,6 @@ public class HotelListFragment extends ListFragment
     }
 
     public interface  AoExcluirHoteis {
-        void exclusaoCompleta(List<Hotel> hoteis);
+        void exclusaoCompleta(List<Carro> hoteis);
     }
 }
