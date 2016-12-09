@@ -1,4 +1,4 @@
-﻿<resources>
+<resources>
     <string name="app_name">AnuncieSeuCarro</string>
     <string name="title_activity_login">Entrar</string>
 
@@ -42,4 +42,5 @@
     <string name="texto_compartilhar">Me hospedei no %1$s e o classifiquei em %2$.1f estrelas</string>
 
     <string name="acao_editar">Editar</string>
+    <string name="btnMeusAnuncios">Meus Anúncios</string>
 </resources>
