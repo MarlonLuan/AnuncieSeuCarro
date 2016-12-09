@@ -20,10 +20,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login" />
-        <activity android:name=".MenuPrincipalActivity"></activity>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".MenuPrincipalActivity" />
+
+        <activity android:name="com.marlonluan.anuncieseucarro.hotel.HotelActivity" />
+        <activity android:name="com.marlonluan.anuncieseucarro.hotel.HotelDetalheActivity"
+            android:parentActivityName="com.marlonluan.anuncieseucarro.hotel.HotelActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.marlonluan.anuncieseucarro.hotel.HotelActivity" />
+        </activity>
     </application>
 
 </manifest>
