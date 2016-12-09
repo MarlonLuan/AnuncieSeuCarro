@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.marlonluan.anuncieseucarro.*;
 
-public class CarolDetalheFragment extends Fragment {
+public class CarroDetalheFragment extends Fragment {
     public static final String TAG_DETALHE = "tagDetalhe";
     private static final String EXTRA_Carro = "carro";
     TextView mTextNome;
@@ -27,10 +27,10 @@ public class CarolDetalheFragment extends Fragment {
 
     ShareActionProvider mShareActionProvider;
 
-    public static CarolDetalheFragment novaInstancia(Carro carro) {
+    public static CarroDetalheFragment novaInstancia(Carro carro) {
         Bundle parametros = new Bundle();
         parametros.putSerializable(EXTRA_Carro, carro);
-        CarolDetalheFragment fragment = new CarolDetalheFragment();
+        CarroDetalheFragment fragment = new CarroDetalheFragment();
         fragment.setArguments(parametros);
         return fragment;
     }

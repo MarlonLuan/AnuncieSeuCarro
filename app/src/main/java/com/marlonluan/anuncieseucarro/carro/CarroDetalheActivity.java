@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import com.marlonluan.anuncieseucarro.*;
 
 public class CarroDetalheActivity extends AppCompatActivity
-        implements CarolDetalheFragment.AoEditarCarro,
+        implements CarroDetalheFragment.AoEditarCarro,
         CarroDialogFragment.AoSalvarCarro {
 
     public static final String EXTRA_Carro = "carro";
@@ -37,10 +37,10 @@ public class CarroDetalheActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
     private void exibirCarroFragment(Carro carro) {
-        CarolDetalheFragment fragment = CarolDetalheFragment.novaInstancia(carro);
+        CarroDetalheFragment fragment = CarroDetalheFragment.novaInstancia(carro);
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.detalhe, fragment, CarolDetalheFragment.TAG_DETALHE);
+        ft.replace(R.id.detalhe, fragment, CarroDetalheFragment.TAG_DETALHE);
         ft.commit();
     }
     @Override

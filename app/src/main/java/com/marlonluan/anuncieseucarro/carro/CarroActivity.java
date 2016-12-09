@@ -26,7 +26,7 @@ public class CarroActivity extends AppCompatActivity
         SearchView.OnQueryTextListener,
         MenuItemCompat.OnActionExpandListener,
         CarroDialogFragment.AoSalvarCarro,
-        CarolDetalheFragment.AoEditarCarro,
+        CarroDetalheFragment.AoEditarCarro,
         CarroListFragment.AoExcluirHoteis {
 
     public static final int REQUEST_EDITAR_Carro = 0;
@@ -55,11 +55,11 @@ public class CarroActivity extends AppCompatActivity
     public void clicouNoCarro(Carro carro) {
         mIdSelecionado = carro.id;
         if (isTablet()) {
-            CarolDetalheFragment fragment =
-                    CarolDetalheFragment.novaInstancia(carro);
+            CarroDetalheFragment fragment =
+                    CarroDetalheFragment.novaInstancia(carro);
             FragmentTransaction ft = mFragmentManager.beginTransaction();
             ft.replace(R.id.detalhe, fragment,
-                    CarolDetalheFragment.TAG_DETALHE);
+                    CarroDetalheFragment.TAG_DETALHE);
             ft.commit();
         } else {
 
@@ -164,8 +164,8 @@ public class CarroActivity extends AppCompatActivity
     }
     @Override
     public void exclusaoCompleta(List<Carro> excluidos) {
-        CarolDetalheFragment f = (CarolDetalheFragment)
-                mFragmentManager.findFragmentByTag(CarolDetalheFragment.TAG_DETALHE);
+        CarroDetalheFragment f = (CarroDetalheFragment)
+                mFragmentManager.findFragmentByTag(CarroDetalheFragment.TAG_DETALHE);
         if (f != null) {
             boolean encontrou = false;
             for (Carro h : excluidos) {
