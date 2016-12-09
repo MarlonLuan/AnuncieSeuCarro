@@ -3,6 +3,7 @@ package com.marlonluan.anuncieseucarro;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -76,6 +77,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == R.id.login || id == EditorInfo.IME_NULL) {
                     attemptLogin();
+                    StartMenuPrincipalActivity();
                     return true;
                 }
                 return false;
@@ -345,6 +347,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = null;
             showProgress(false);
         }
+    }
+
+    public void StartMenuPrincipalActivity(){
+        Intent it = new Intent(this, MenuPrincipalActivity.class);
+        startActivity(it);
     }
 }
 
