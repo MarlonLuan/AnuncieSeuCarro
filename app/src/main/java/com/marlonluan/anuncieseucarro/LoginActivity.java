@@ -77,7 +77,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == R.id.login || id == EditorInfo.IME_NULL) {
                     attemptLogin();
-                    StartMenuPrincipalActivity();
                     return true;
                 }
                 return false;
@@ -89,6 +88,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public void onClick(View view) {
                 attemptLogin();
+                StartMenuPrincipalActivity();
             }
         });
 
