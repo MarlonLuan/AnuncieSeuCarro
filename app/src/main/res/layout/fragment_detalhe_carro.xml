@@ -1,24 +1,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    android:gravity="center"
+    android:orientation="vertical">
+
     <TextView
+        android:id="@+id/txtNome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/txtNome"/>
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
     <TextView
+        android:id="@+id/txtEndereco"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/txtEndereco"/>
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
     <RatingBar
+        android:id="@+id/rtbEstrelas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/rtbEstrelas"
-        android:stepSize="0.5"
-        android:numStars="5"
+        android:layout_gravity="center_horizontal"
         android:isIndicator="true"
-        android:layout_gravity="center_horizontal"/>
+        android:numStars="5"
+        android:stepSize="0.5" />
+
+    <TextView
+        android:id="@+id/txtValor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 </LinearLayout>

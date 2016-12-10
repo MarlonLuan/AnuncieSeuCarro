@@ -1,45 +1,64 @@
-<ScrollView
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/scrollView">
+    android:layout_height="wrap_content">
+
     <LinearLayout
-        android:orientation="vertical"
-        android:padding="16dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
         <TextView
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/nome"
-            android:id="@+id/textView"/>
+            android:text="@string/nome" />
+
         <EditText
+            android:id="@+id/txtNome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textCapWords"
             android:imeOptions="actionNext"
-            android:id="@+id/txtNome"/>
+            android:inputType="textCapWords" />
+
         <TextView
+            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/endereco"
-            android:id="@+id/textView2"/>
+            android:text="@string/endereco" />
+
         <EditText
+            android:id="@+id/txtEndereco"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textCapWords"
             android:imeOptions="actionDone"
-            android:id="@+id/txtEndereco"/>
+            android:inputType="textCapWords" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/classificacao"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"
+            android:text="@string/classificacao" />
+
         <RatingBar
+            android:id="@+id/rtbEstrelas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/rtbEstrelas"
-            android:stepSize="0.5"
-            android:numStars="5"/>
+            android:numStars="5"
+            android:stepSize="0.5" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/valor" />
+
+        <EditText
+            android:id="@+id/txtValor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionDone"
+            android:inputType="numberDecimal" />
     </LinearLayout>
 </ScrollView>

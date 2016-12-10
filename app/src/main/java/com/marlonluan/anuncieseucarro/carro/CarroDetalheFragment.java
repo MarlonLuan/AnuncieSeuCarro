@@ -17,12 +17,15 @@ import android.widget.TextView;
 
 import com.marlonluan.anuncieseucarro.*;
 
+import com.marlonluan.anuncieseucarro.util.*;
+
 public class CarroDetalheFragment extends Fragment {
     public static final String TAG_DETALHE = "tagDetalhe";
     private static final String EXTRA_Carro = "carro";
     TextView mTextNome;
     TextView mTextEndereco;
     RatingBar mRatingEstrelas;
+    TextView mTextValor;
     Carro mCarro;
 
     ShareActionProvider mShareActionProvider;
@@ -51,10 +54,13 @@ public class CarroDetalheFragment extends Fragment {
                 layout.findViewById(R.id.txtEndereco);
         mRatingEstrelas = (RatingBar)
                 layout.findViewById(R.id.rtbEstrelas);
+        mTextValor = (TextView)
+                layout.findViewById(R.id.txtValor);
         if (mCarro != null) {
             mTextNome.setText(mCarro.nome);
             mTextEndereco.setText(mCarro.endereco);
             mRatingEstrelas.setRating(mCarro.estrelas);
+            mTextValor.setText(Auxiliar.FormataDinheiro(mCarro.valor));
         }
         return layout;
     }
@@ -67,7 +73,7 @@ public class CarroDetalheFragment extends Fragment {
         mShareActionProvider = (ShareActionProvider)
                 MenuItemCompat.getActionProvider(shareItem);
         String texto = getString(R.string.texto_compartilhar,
-                mCarro.nome, mCarro.estrelas);
+                mCarro.nome, mCarro.valor);
         Intent it = new Intent(Intent.ACTION_SEND);
         it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         it.setType("text/plain");

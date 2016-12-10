@@ -19,6 +19,7 @@ public class CarroDialogFragment extends DialogFragment
     private EditText txtNome;
     private EditText txtEndereco;
     private RatingBar rtbEstrelas;
+    private EditText txtValor;
     private Carro mCarro;
     public static CarroDialogFragment newInstance(Carro carro) {
         Bundle bundle = new Bundle();
@@ -42,10 +43,12 @@ public class CarroDialogFragment extends DialogFragment
         txtEndereco = (EditText)layout.findViewById(R.id.txtEndereco);
         txtEndereco.setOnEditorActionListener(this);
         rtbEstrelas = (RatingBar)layout.findViewById(R.id.rtbEstrelas);
+        txtValor = (EditText)layout.findViewById(R.id.txtValor);
         if (mCarro != null) {
             txtNome.setText(mCarro.nome);
             txtEndereco.setText(mCarro.endereco);
             rtbEstrelas.setRating(mCarro.estrelas);
+            txtValor.setText(String.valueOf(mCarro.valor));
         }
         // Exibe o teclado virtual ao exibir o Dialog
         getDialog().getWindow().setSoftInputMode(
@@ -62,7 +65,8 @@ public class CarroDialogFragment extends DialogFragment
                     mCarro = new Carro(
                             txtNome.getText().toString(),
                             txtEndereco.getText().toString(),
-                            rtbEstrelas.getRating());
+                            rtbEstrelas.getRating(),
+                            Double.valueOf(txtValor.getText().toString()));
                 } else {
                     mCarro.nome = txtNome.getText().toString();
                     mCarro.endereco = txtEndereco.getText().toString();

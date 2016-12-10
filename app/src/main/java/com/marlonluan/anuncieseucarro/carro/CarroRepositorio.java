@@ -18,7 +18,8 @@ public class CarroRepositorio {
         cv.put(CarroSQLHelper.COLUNA_NOME, carro.nome);
         cv.put(CarroSQLHelper.COLUNA_ENDERECO, carro.endereco);
         cv.put(CarroSQLHelper.COLUNA_ESTRELAS, carro.estrelas);
-        long id = db.insert(CarroSQLHelper.TABELA_Carro, null, cv);
+        cv.put(CarroSQLHelper.COLUNA_VALOR, carro.valor);
+        long id = db.insert(CarroSQLHelper.TABELA_CARRO, null, cv);
         if (id != -1) {
             carro.id = id;
         }
@@ -32,8 +33,9 @@ public class CarroRepositorio {
         cv.put(CarroSQLHelper.COLUNA_NOME, carro.nome);
         cv.put(CarroSQLHelper.COLUNA_ENDERECO, carro.endereco);
         cv.put(CarroSQLHelper.COLUNA_ESTRELAS, carro.estrelas);
+        cv.put(CarroSQLHelper.COLUNA_VALOR, carro.valor);
         int linhasAfetadas = db.update(
-                CarroSQLHelper.TABELA_Carro,
+                CarroSQLHelper.TABELA_CARRO,
                 cv,
                 CarroSQLHelper.COLUNA_ID +" = ?",
                 new String[]{ String.valueOf(carro.id)});
@@ -50,7 +52,7 @@ public class CarroRepositorio {
     public int excluir(Carro carro) {
         SQLiteDatabase db = helper.getWritableDatabase();
         int linhasAfetadas = db.delete(
-                CarroSQLHelper.TABELA_Carro,
+                CarroSQLHelper.TABELA_CARRO,
                 CarroSQLHelper.COLUNA_ID +" = ?",
                 new String[]{ String.valueOf(carro.id)});
         db.close();
@@ -58,7 +60,7 @@ public class CarroRepositorio {
     }
     public List<Carro> buscarCarro(String filtro) {
         SQLiteDatabase db = helper.getReadableDatabase();
-        String sql = "SELECT * FROM "+ CarroSQLHelper.TABELA_Carro;
+        String sql = "SELECT * FROM "+ CarroSQLHelper.TABELA_CARRO;
         String[] argumentos = null;
         if (filtro != null) {
             sql += " WHERE "+ CarroSQLHelper.COLUNA_NOME +" LIKE ?";
@@ -80,7 +82,10 @@ public class CarroRepositorio {
             float estrelas = cursor.getFloat(
                     cursor.getColumnIndex(
                             CarroSQLHelper.COLUNA_ESTRELAS));
-            Carro carro = new Carro(id, nome, endereco, estrelas);
+            double valor = cursor.getDouble(
+                    cursor.getColumnIndex(
+                            CarroSQLHelper.COLUNA_VALOR));
+            Carro carro = new Carro(id, nome, endereco, estrelas, valor);
             carros.add(carro);
         }
         cursor.close();

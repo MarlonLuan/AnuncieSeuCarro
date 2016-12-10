@@ -126,7 +126,8 @@ public class CarroActivity extends AppCompatActivity
                 public void onClick(DialogInterface dialogInterface, int i) {
                     if (i == DialogInterface.BUTTON_NEGATIVE){
                         Intent it = new Intent(Intent.ACTION_VIEW,
-                                Uri.parse("http://www.nglauber.com.br"));
+                                //Uri.parse(R.string.url_site));
+                                Uri.parse("http://www.marlonluan.com.br"));
                         startActivity(it);
                     }
                 }
