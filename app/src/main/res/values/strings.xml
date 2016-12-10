@@ -1,11 +1,9 @@
 <resources>
     <string name="app_name">AnuncieSeuCarro</string>
     <string name="url_site">http://www.marlonluan.com.br</string>
-
-
     <string name="moeda_real">R$</string>
 
-    <!-- Strings related to login -->
+    <!-- Strings relacionadas ao Login -->
     <string name="title_activity_login">Entrar</string>
     <string name="prompt_email">E-mail</string>
     <string name="prompt_password">Senha (opcional)</string>
@@ -16,6 +14,9 @@
     <string name="error_incorrect_password">Senha incorreta</string>
     <string name="error_field_required">Campo obrigatório</string>
     <string name="permission_rationale">Necessário permissão para acessar os Contatos.</string>
+
+    <!-- Strings relacionadas ao Menu Principal -->
+    <string name="btnMeusAnuncios">Meus Anúncios</string>
 
     <!-- Strings relacionadas ao SQLite -->
     <string name="acao_pesquisar">Pesquisar</string>
@@ -45,5 +46,9 @@
     <string name="texto_compartilhar">Compartilhei o carro %1$s com o valor R$ %2$.1f</string>
 
     <string name="acao_editar">Editar</string>
-    <string name="btnMeusAnuncios">Meus Anúncios</string>
+
+    <!-- Strings relacionadas aos Mapas -->
+    <string name="title_activity_maps">Map</string>
+    <string name="btnLocalizacao">Ver Localização</string>
+
 </resources>
