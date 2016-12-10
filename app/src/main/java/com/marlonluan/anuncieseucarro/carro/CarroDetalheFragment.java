@@ -1,6 +1,7 @@
 package com.marlonluan.anuncieseucarro.carro;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,11 +13,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.marlonluan.anuncieseucarro.*;
 
+import com.marlonluan.anuncieseucarro.mapas.MapsActivity;
 import com.marlonluan.anuncieseucarro.util.*;
 
 public class CarroDetalheFragment extends Fragment {
@@ -62,6 +65,14 @@ public class CarroDetalheFragment extends Fragment {
             mRatingEstrelas.setRating(mCarro.estrelas);
             mTextValor.setText(Auxiliar.FormataDinheiro(mCarro.valor));
         }
+
+        Button mBtnLocalizacao = (Button) layout.findViewById(R.id.btnLocalizacao);
+        mBtnLocalizacao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                StartMapsActivity();
+            }
+        });
         return layout;
     }
 
@@ -98,6 +109,12 @@ public class CarroDetalheFragment extends Fragment {
     }
     public interface AoEditarCarro {
         void aoEditarcarro(Carro carro);
+    }
+
+    public void StartMapsActivity(){
+        final Context context = getContext();
+        Intent it = new Intent(getContext(), MapsActivity.class);
+        startActivity(it);
     }
 }
 

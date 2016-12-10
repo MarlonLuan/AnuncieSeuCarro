@@ -55,6 +55,4 @@ public class CarroDetalheActivity extends AppCompatActivity
         exibirCarroFragment(carro);
         setResult(RESULT_OK);
     }
-
-
 }
