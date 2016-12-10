@@ -66,7 +66,7 @@ public class CarroRepositorio {
         }
         sql += " ORDER BY "+ CarroSQLHelper.COLUNA_NOME;
         Cursor cursor = db.rawQuery(sql, argumentos);
-        List<Carro> hoteis = new ArrayList<Carro>();
+        List<Carro> carros = new ArrayList<Carro>();
         while (cursor.moveToNext()) {
             long id = cursor.getLong(
                     cursor.getColumnIndex(
@@ -81,10 +81,10 @@ public class CarroRepositorio {
                     cursor.getColumnIndex(
                             CarroSQLHelper.COLUNA_ESTRELAS));
             Carro carro = new Carro(id, nome, endereco, estrelas);
-            hoteis.add(carro);
+            carros.add(carro);
         }
         cursor.close();
         db.close();
-        return hoteis;
+        return carros;
     }
 }

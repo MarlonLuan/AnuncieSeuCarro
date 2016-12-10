@@ -7,6 +7,8 @@ public class Carro implements Serializable {
     public String nome;
     public String endereco;
     public float estrelas;
+    public float valor;
+
     public Carro(long id, String nome, String endereco, float estrelas) {
         this.id = id;
         this.nome = nome;

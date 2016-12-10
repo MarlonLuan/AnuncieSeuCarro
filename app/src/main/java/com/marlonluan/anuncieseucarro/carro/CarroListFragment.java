@@ -24,7 +24,7 @@ public class CarroListFragment extends ListFragment
     ListView mListView;
     ActionMode mActionMode;
 
-    List<Carro> mHoteis;
+    List<Carro> mCarros;
     ArrayAdapter<Carro> mAdapter;
     CarroRepositorio mRepositorio;
 
@@ -75,24 +75,24 @@ public class CarroListFragment extends ListFragment
             limparBusca();
             return;
         }
-        List<Carro> hoteisEncontrados =
+        List<Carro> carrosEncontrados =
                 mRepositorio.buscarCarro("%" + s + "%");
 
         mListView.setOnItemLongClickListener(null);
         mAdapter = new ArrayAdapter<Carro>(
                 getActivity(),
                 android.R.layout.simple_list_item_1,
-                hoteisEncontrados);
+                carrosEncontrados);
         setListAdapter(mAdapter);
     }
 
     public void limparBusca() {
-        mHoteis = mRepositorio.buscarCarro(null);
+        mCarros = mRepositorio.buscarCarro(null);
         mListView.setOnItemLongClickListener(this);
         mAdapter = new ArrayAdapter<Carro>(
                 getActivity(),
                 android.R.layout.simple_list_item_activated_1,
-                mHoteis);
+                mCarros);
         setListAdapter(mAdapter);
     }
 
@@ -171,23 +171,23 @@ public class CarroListFragment extends ListFragment
     }
 
     private void remover() {
-        final List<Carro> hoteisExcluidos = new ArrayList<Carro>();
+        final List<Carro> carrosExcluidos = new ArrayList<Carro>();
         SparseBooleanArray checked = mListView.getCheckedItemPositions();
         for (int i = checked.size() - 1; i >= 0; i--) {
             if (checked.valueAt(i)) {
                 int position = checked.keyAt(i);
-                Carro carro = mHoteis.remove(position);
-                hoteisExcluidos.add(carro);
+                Carro carro = mCarros.remove(position);
+                carrosExcluidos.add(carro);
                 mRepositorio.excluir(carro);
             }
         }
         Snackbar.make(mListView,
-                getString(R.string.mensagem_excluir, hoteisExcluidos.size()),
+                getString(R.string.mensagem_excluir, carrosExcluidos.size()),
                 Snackbar.LENGTH_LONG)
                 .setAction(R.string.desfazer, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        for (Carro carro : hoteisExcluidos) {
+                        for (Carro carro : carrosExcluidos) {
                             carro.id = 0;
                             mRepositorio.salvar(carro);
                         }
@@ -195,12 +195,12 @@ public class CarroListFragment extends ListFragment
                     }
                 }).show();
 
-        if (hoteisExcluidos.size() > 0 && getActivity() instanceof AoExcluirHoteis){
-            ((AoExcluirHoteis)getActivity()).exclusaoCompleta(hoteisExcluidos);
+        if (carrosExcluidos.size() > 0 && getActivity() instanceof AoExcluirCarros){
+            ((AoExcluirCarros)getActivity()).exclusaoCompleta(carrosExcluidos);
         }
     }
 
-    public interface  AoExcluirHoteis {
-        void exclusaoCompleta(List<Carro> hoteis);
+    public interface  AoExcluirCarros {
+        void exclusaoCompleta(List<Carro> carros);
     }
 }

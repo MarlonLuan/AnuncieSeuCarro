@@ -27,7 +27,7 @@ public class CarroActivity extends AppCompatActivity
         MenuItemCompat.OnActionExpandListener,
         CarroDialogFragment.AoSalvarCarro,
         CarroDetalheFragment.AoEditarCarro,
-        CarroListFragment.AoExcluirHoteis {
+        CarroListFragment.AoExcluirCarros {
 
     public static final int REQUEST_EDITAR_Carro = 0;
     private long mIdSelecionado;
