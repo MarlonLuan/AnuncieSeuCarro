@@ -13,7 +13,7 @@ public class AnuncieSeuCarroActivity extends AppCompatActivity {
         StartLoginActivity();
     }
 
-    public void StartLoginActivity(){
+    public void StartLoginActivity() {
         Intent it = new Intent(this, LoginActivity.class);
         startActivity(it);
     }

@@ -17,7 +17,6 @@ public class Carro implements Serializable {
         this.endereco = endereco;
         this.estrelas = estrelas;
         this.valor = valor;
-        Log.i("ML", String.valueOf(valor));
     }
     public Carro(String nome, String endereco, float estrelas, double valor) {
         this(0, nome, endereco, estrelas, valor);

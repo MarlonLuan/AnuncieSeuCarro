@@ -26,7 +26,6 @@ public class MenuPrincipalActivity extends AppCompatActivity {
         });
     }
 
-
     public void StartCarroActivity(){
         Intent it = new Intent(this, CarroActivity.class);
         startActivity(it);

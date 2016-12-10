@@ -71,6 +71,7 @@ public class CarroDialogFragment extends DialogFragment
                     mCarro.nome = txtNome.getText().toString();
                     mCarro.endereco = txtEndereco.getText().toString();
                     mCarro.estrelas = rtbEstrelas.getRating();
+                    mCarro.valor = Double.valueOf(txtValor.getText().toString());
                 }
                 AoSalvarCarro listener = (AoSalvarCarro) activity;
                 listener.salvouCarro(mCarro);
