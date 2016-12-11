@@ -24,7 +24,8 @@ import com.marlonluan.anuncieseucarro.util.*;
 
 public class CarroDetalheFragment extends Fragment {
     public static final String TAG_DETALHE = "tagDetalhe";
-    private static final String EXTRA_Carro = "carro";
+    private static final String EXTRA_CARRO = "carro";
+    private static final String EXTRA_ENDERECO = "endereco";
     TextView mTextNome;
     TextView mTextEndereco;
     RatingBar mRatingEstrelas;
@@ -35,7 +36,7 @@ public class CarroDetalheFragment extends Fragment {
 
     public static CarroDetalheFragment novaInstancia(Carro carro) {
         Bundle parametros = new Bundle();
-        parametros.putSerializable(EXTRA_Carro, carro);
+        parametros.putSerializable(EXTRA_CARRO, carro);
         CarroDetalheFragment fragment = new CarroDetalheFragment();
         fragment.setArguments(parametros);
         return fragment;
@@ -44,7 +45,7 @@ public class CarroDetalheFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mCarro = (Carro)
-                getArguments().getSerializable(EXTRA_Carro);
+                getArguments().getSerializable(EXTRA_CARRO);
         setHasOptionsMenu(true);
     }
     @Override
@@ -114,7 +115,7 @@ public class CarroDetalheFragment extends Fragment {
     public void StartMapsActivity(){
         final Context context = getContext();
         Intent it = new Intent(getContext(), MapsActivity.class);
+        it.putExtra(EXTRA_ENDERECO, mCarro.endereco);
         startActivity(it);
     }
 }
-
