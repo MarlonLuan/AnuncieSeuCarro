@@ -11,9 +11,9 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.marlonluan.anuncieseucarro.*;
+import com.marlonluan.anuncieseucarro.mapas.EnderecoFormatado;
 
-public class CarroDialogFragment extends DialogFragment
-        implements TextView.OnEditorActionListener {
+public class CarroDialogFragment extends DialogFragment implements TextView.OnEditorActionListener {
     private static final String DIALOG_TAG = "editDialog";
     private static final String EXTRA_Carro = "carro";
     private EditText txtNome;
@@ -21,6 +21,7 @@ public class CarroDialogFragment extends DialogFragment
     private RatingBar rtbEstrelas;
     private EditText txtValor;
     private Carro mCarro;
+
     public static CarroDialogFragment newInstance(Carro carro) {
         Bundle bundle = new Bundle();
         bundle.putSerializable(EXTRA_Carro, carro);
@@ -28,22 +29,28 @@ public class CarroDialogFragment extends DialogFragment
         dialog.setArguments(bundle);
         return dialog;
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mCarro = (Carro)getArguments().getSerializable(EXTRA_Carro);
+        mCarro = (Carro) getArguments().getSerializable(EXTRA_Carro);
     }
+
     @Override
-    public View onCreateView(LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        View layout = inflater.inflate(
-                R.layout.fragment_dialog_carro, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View layout = inflater.inflate(R.layout.fragment_dialog_carro, container, false);
         txtNome = (EditText) layout.findViewById(R.id.txtNome);
         txtNome.requestFocus();
-        txtEndereco = (EditText)layout.findViewById(R.id.txtEndereco);
-        txtEndereco.setOnEditorActionListener(this);
-        rtbEstrelas = (RatingBar)layout.findViewById(R.id.rtbEstrelas);
-        txtValor = (EditText)layout.findViewById(R.id.txtValor);
+        txtEndereco = (EditText) layout.findViewById(R.id.txtEndereco);
+        rtbEstrelas = (RatingBar) layout.findViewById(R.id.rtbEstrelas);
+        txtValor = (EditText) layout.findViewById(R.id.txtValor);
+        txtValor.setOnEditorActionListener(this);
+        try {
+            String stringLocal = "INFORME A LOCALIDADE";
+            txtEndereco.setText(new EnderecoFormatado().execute(stringLocal).get());
+        } catch (Exception ex) {
+        }
+
         if (mCarro != null) {
             txtNome.setText(mCarro.nome);
             txtEndereco.setText(mCarro.endereco);
@@ -51,11 +58,11 @@ public class CarroDialogFragment extends DialogFragment
             txtValor.setText(String.valueOf(mCarro.valor));
         }
         // Exibe o teclado virtual ao exibir o Dialog
-        getDialog().getWindow().setSoftInputMode(
-                WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         getDialog().setTitle(R.string.acao_novo);
         return layout;
     }
+
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         if (EditorInfo.IME_ACTION_DONE == actionId) {
@@ -82,11 +89,13 @@ public class CarroDialogFragment extends DialogFragment
         }
         return false;
     }
+
     public void abrir(FragmentManager fm) {
         if (fm.findFragmentByTag(DIALOG_TAG) == null) {
             show(fm, DIALOG_TAG);
         }
     }
+
     public interface AoSalvarCarro {
         void salvouCarro(Carro carro);
     }
