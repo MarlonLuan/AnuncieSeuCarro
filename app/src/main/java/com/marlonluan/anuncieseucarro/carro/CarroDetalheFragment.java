@@ -20,15 +20,21 @@ import android.widget.TextView;
 import com.marlonluan.anuncieseucarro.*;
 
 import com.marlonluan.anuncieseucarro.mapas.MapsActivity;
+import com.marlonluan.anuncieseucarro.sms.SmsActivity;
 import com.marlonluan.anuncieseucarro.util.*;
 
 public class CarroDetalheFragment extends Fragment {
     public static final String TAG_DETALHE = "tagDetalhe";
     private static final String EXTRA_CARRO = "carro";
     private static final String EXTRA_ENDERECO = "endereco";
+    private static final String EXTRA_TELEFONE = "telefone";
+
+    private static final String NUMERO_TELEFONE = "(27) 99999-9999";
+
     TextView mTextNome;
     TextView mTextEndereco;
     RatingBar mRatingEstrelas;
+    TextView mTextTelefone;
     TextView mTextValor;
     Carro mCarro;
 
@@ -58,12 +64,15 @@ public class CarroDetalheFragment extends Fragment {
                 layout.findViewById(R.id.txtEndereco);
         mRatingEstrelas = (RatingBar)
                 layout.findViewById(R.id.rtbEstrelas);
+        mTextTelefone = (TextView)
+                layout.findViewById(R.id.txtTelefone);
         mTextValor = (TextView)
                 layout.findViewById(R.id.txtValor);
         if (mCarro != null) {
             mTextNome.setText(mCarro.nome);
             mTextEndereco.setText(mCarro.endereco);
             mRatingEstrelas.setRating(mCarro.estrelas);
+            mTextTelefone.setText(NUMERO_TELEFONE);
             mTextValor.setText(Auxiliar.FormataDinheiro(mCarro.valor));
         }
 
@@ -72,6 +81,14 @@ public class CarroDetalheFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 StartMapsActivity();
+            }
+        });
+
+        Button mBtnSms = (Button) layout.findViewById(R.id.btnSms);
+        mBtnSms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                StartSmsActivity();
             }
         });
         return layout;
@@ -116,6 +133,14 @@ public class CarroDetalheFragment extends Fragment {
         final Context context = getContext();
         Intent it = new Intent(getContext(), MapsActivity.class);
         it.putExtra(EXTRA_ENDERECO, mCarro.endereco);
+        startActivity(it);
+    }
+
+    public void StartSmsActivity(){
+        final Context context = getContext();
+        Intent it = new Intent(getContext(), SmsActivity.class);
+        //it.putExtra(EXTRA_TELEFONE, mCarro.telefone);
+        it.putExtra(EXTRA_TELEFONE, String.valueOf(mTextTelefone.getText()));
         startActivity(it);
     }
 }

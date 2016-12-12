@@ -51,4 +51,7 @@
     <string name="title_activity_maps">Map</string>
     <string name="btnLocalizacao">Ver Localização</string>
 
+    <!-- Strings relacionadas aos SMS -->
+    <string name="btnSms">Enviar SMS</string>
+
 </resources>
